@@ -24,19 +24,30 @@ body {
     width: 80vw;
     height: 75vh;
     font-size: 150%;
+    resize: none;
+    margin-top: 5px;
 }
 
 #characters {
     font-size: min(400%, 6vw);
     margin: 0;
     padding: 0;
-    margin-bottom: 25px;
 }
 
-#number {
+.number {
     user-select: all;
 }
 
+#otherStats {
+    padding: 10px;
+}
+
+.secondaryCount {
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
 
 @media (prefers-color-scheme: dark) {
     body {

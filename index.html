@@ -15,7 +15,11 @@
 
     <div id="container">
         <p id="characters"></p>
-        <textarea id="input" name="Text Area" oninput="CountCharacters()" placeholder="Type here"></textarea>
+        <div id="otherStats">
+            <p class="secondaryCount" id="words"></p>
+            <p class="secondaryCount" id="lines"></p>
+        </div>
+        <textarea id="input" name="Text Area" placeholder="Type here" ondrop="dropHandler(event);"></textarea>
     </div>
 
     <script src="script.js"></script>
