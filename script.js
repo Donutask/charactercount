@@ -74,6 +74,8 @@ function ReduceLag(charCount) {
 
 //Source: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 function dropHandler(ev) {
+    input.className = "";
+
     // Prevent file from being opened)
     ev.preventDefault();
 
@@ -100,6 +102,14 @@ async function ReadFile(file) {
 
     input.value += text;
     CountCharacters();
+}
+
+function DragEnter() {
+    input.className = "dropTarget";
+}
+
+function DragLeave() {
+    input.className = "";
 }
 
 

@@ -19,7 +19,8 @@
             <p class="secondaryCount" id="words"></p>
             <p class="secondaryCount" id="lines"></p>
         </div>
-        <textarea id="input" name="Text Area" placeholder="Type here" ondrop="dropHandler(event);"></textarea>
+        <textarea id="input" name="Text Area" placeholder="Type or drop file here" ondrop="dropHandler(event);"
+            ondragleave="DragLeave()" ondragenter="DragEnter()"></textarea>
     </div>
 
     <script src="script.js"></script>
