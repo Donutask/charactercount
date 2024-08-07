@@ -2,6 +2,7 @@ const input = document.getElementById("input");
 const characterDisplay = document.getElementById("characters");
 const wordDisplay = document.getElementById("words");
 const lineDisplay = document.getElementById("lines");
+const timeDisplay = document.getElementById("time");
 
 // After this many characters, disable features to not crash computer
 const lagLimit = 50000;
@@ -33,10 +34,20 @@ async function CountCharacters() {
 
             const lines = CountLines(v);
             lineDisplay.innerHTML = `<b class=number>${lines}</b> Line${lines == 1 ? "" : "s"}`
+
+            //Using word calculation, show aproximate time to speak (but only if over 1 minute long)
+            const time = CountTime(words);
+
+            if (time < 0.1) {
+                timeDisplay.innerHTML = "<b class=number>0</b> Minutes"
+            } else {
+                timeDisplay.innerHTML = `~<b class=number>${time}</b> Minute${time == 1 ? "" : "s"}`
+            }
         })
     } else {
         wordDisplay.innerHTML = "";
         lineDisplay.innerHTML = "";
+        timeDisplay.innerHTML = "";
     }
 }
 
@@ -54,6 +65,11 @@ function CountLines(str) {
     } else {
         return lines = (String(str).match(/\n/g) || '').length + 1;
     }
+}
+
+// Time to speak in minutes (assuming 140 words per minute)
+function CountTime(wordCount) {
+    return (wordCount / 140).toFixed(1)
 }
 
 // With a lot of characters, disable TextArea functionality to improve performance (hoperfully)
