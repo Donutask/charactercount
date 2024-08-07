@@ -1,0 +1,46 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    background-color: whitesmoke;
+    margin: 0px;
+    text-align: center;
+}
+
+
+
+#container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    width: 80vw;
+    white-space: nowrap;
+}
+
+#input {
+    width: 80vw;
+    height: 75vh;
+    font-size: 150%;
+}
+
+#characters {
+    font-size: min(400%, 6vw);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+#number {
+    user-select: all;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: white;
+        background-color: #2B2A33;
+    }
+}
