@@ -6,8 +6,6 @@ body {
     text-align: center;
 }
 
-
-
 #container {
     position: absolute;
     left: 50%;
@@ -54,13 +52,16 @@ body {
 
 #otherStats {
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 10px;
 }
 
 .secondaryCount {
     display: inline;
-    margin-left: 10px;
-    margin-right: 10px;
-
+    margin: 0;
 }
 
 @media (prefers-color-scheme: dark) {
