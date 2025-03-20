@@ -24,6 +24,8 @@ body {
     font-size: 150%;
     resize: none;
     margin-top: 5px;
+    border: solid gray 2px;
+    border-radius: 5px;
 }
 
 .dropTarget {
@@ -68,5 +70,10 @@ body {
     body {
         color: white;
         background-color: #2B2A33;
+    }
+
+    #input {
+        color: white;
+        background-color: hsl(247, 10%, 25%);
     }
 }
