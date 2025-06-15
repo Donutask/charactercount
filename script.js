@@ -7,27 +7,37 @@ const timeDisplay = document.getElementById("time");
 // After this many characters, disable features to not crash computer
 const lagLimit = 50000;
 
-async function CountCharacters() {
+async function CountCharacters(selection) {
     // Character Count
-    const v = input.value;
-    const c = v.length;
+    let v;
+    if (selection != null) {
+        v = selection;
+    } else {
+        v = input.value;
+    }
+    const characters = v.replaceAll("\n", "").length;
 
-    ReduceLag(c);
+    ReduceLag(characters);
 
     // Plural or singular
-    const word = `Character${c == 1 ? '' : 's'}`;
+    let word;
+    if (selection != null) {
+        word = `Selected`;
+    } else {
+        word = `Character${characters == 1 ? '' : 's'}`;
+    }
     //On page
-    characterDisplay.innerHTML = `<b class='number'>${c}</b> ${word}`;
+    characterDisplay.innerHTML = `<b class='number'>${characters}</b> ${word}`;
 
     //Title
-    if (c <= 0) {
+    if (characters <= 0) {
         document.title = `Just a Character Counter`;
     } else {
-        document.title = `${c} ${word}`;
+        document.title = `${characters} ${word}`;
     }
 
     // Count words and lines, but only under a certain amount of characters
-    if (c < lagLimit) {
+    if (characters < lagLimit) {
         requestIdleCallback(() => {
             const words = CountWords(v);
             wordDisplay.innerHTML = `<b class=number>${words}</b> Word${words == 1 ? "" : "s"}`
@@ -69,7 +79,37 @@ function CountLines(str) {
 
 // Time to speak in minutes (assuming 140 words per minute)
 function CountTime(wordCount) {
-    return (wordCount / 140).toFixed(1)
+    let estimation = (wordCount / 140);
+    //So only a couple words isn't shown as 0 seconds
+    if (wordCount > 0 && estimation < 0.1) {
+        estimation = 0.1;
+    }
+    return estimation.toFixed(1)
+}
+
+//User selects part of the text in the input box
+let inSelectMode = false;
+function CountSelectedCharacters() {
+    const selection = window.getSelection().toString();
+    if (selection.length <= 0) {
+        EndSelectMode();
+    } else {
+        inSelectMode = true;
+        CountCharacters(selection);
+    }
+}
+
+function EndSelectMode() {
+    if (inSelectMode) {
+        inSelectMode = false;
+        CountCharacters();
+    }
+}
+
+function EndIfNoSelection() {
+    if (window.getSelection().toString().length <= 0) {
+        EndSelectMode();
+    }
 }
 
 // With a lot of characters, disable TextArea functionality to improve performance (hoperfully)
@@ -130,5 +170,7 @@ function DragLeave() {
 
 
 input.addEventListener('input', () => CountCharacters());
+input.addEventListener('selectionchange', () => CountSelectedCharacters());
+input.addEventListener('blur', () => EndIfNoSelection());
 
 CountCharacters();

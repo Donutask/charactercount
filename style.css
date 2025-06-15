@@ -75,5 +75,6 @@ body {
     #input {
         color: white;
         background-color: hsl(247, 10%, 25%);
+        scrollbar-color: #CCC #555;
     }
 }
